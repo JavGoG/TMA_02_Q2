@@ -2,6 +2,7 @@
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 
 //(Q2)(b)
 public class BusRoutes {
@@ -62,13 +63,31 @@ public class BusRoutes {
         printRoute(13);
         routes.get(13).forEach(System.out::println);
     }
+//    (Q2)(f) returns a HashSet containing all the bus numbers
+//    that have aStop on their route, or an empty HashSet if there are none.
+    public HashSet<Integer> getBusesStoppingHere(String aStop)
+    {
+        final HashSet<Integer> integers = new HashSet<>();
+        ArrayList<String> thirtyTwo  = routes.get(32);
+        ArrayList<String> twentyTwo = routes.get(22);
+        ArrayList<String> thirteen = routes.get(13);
 
-
-
+        if(twentyTwo.contains(aStop)){
+            integers.add(22);
+        }
+        if(thirteen.contains(aStop)){
+            integers.add(13);
+        }
+        if(thirtyTwo.contains(32)){
+            integers.add(32);
+        }
+        return integers;
+    }
 
     public static void main(String[] args) {
         BusRoutes busRoutes = new BusRoutes();
-        busRoutes.printAllRoutes();
+        busRoutes.populateRoutes();
+        System.out.println(busRoutes.getBusesStoppingHere("Hospital"));
     }
 }
 
