@@ -48,12 +48,27 @@ public class BusRoutes {
 
     //    (Q2)(d)
     public void printRoute(int busNum) {
-        System.out.println("Bus number" + busNum + "route:");
+        System.out.println("Bus number " + busNum + " route: ");
+    }
+    //    (Q2)(e)
+    public void printAllRoutes()
+    {
+        printRoute(32);
+        routes.get(32).forEach(System.out::println);
+        System.out.println("");
+        printRoute(22);
+        routes.get(22).forEach(System.out::println);
+        System.out.println("");
+        printRoute(13);
+        routes.get(13).forEach(System.out::println);
     }
 
 
+
+
     public static void main(String[] args) {
-        HashMap<String, String> caca = new HashMap<>();
+        BusRoutes busRoutes = new BusRoutes();
+        busRoutes.printAllRoutes();
     }
 }
 
