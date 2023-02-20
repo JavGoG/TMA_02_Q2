@@ -93,14 +93,40 @@ public class BusRoutes {
         System.out.println(buses);
         return stopsAndBusNumbers;
     }
+//(Q2)(h)
+    public void accessInfoService()
+    {
+        System.out.println("");
+        System.out.println("");
+        System.out.println("Welcome to the Bus Information Service.");
+        System.out.print("Type where you want to go to -> ");
+        InputReader inputReader = new InputReader();
+        BusRoutes busRoutes = new BusRoutes();
+        HashSet<Integer> service = busRoutes.getBusesStoppingHere(inputReader.getInput());
+        if(service.isEmpty()) {
+            System.out.println("Sorry, no buses go there");
+        }else {
+            System.out.println('\n');
+            System.out.println("Here is a list of buses: ");
+            for (Integer ser: service) {
+                System.out.println(ser);
+            }
+            System.out.println("");
+            System.out.print("Enter bus number to get a full route -> ");
+            busRoutes.printRoute(new Integer(inputReader.getInput()));
+            routes.get(new Integer(inputReader.getInput())).forEach(System.out::println);
+
+        }
+    }
 
 
     public static void main(String[] args) {
         BusRoutes busRoutes = new BusRoutes();
         busRoutes.populateRoutes();
+        busRoutes.accessInfoService();
 //        System.out.println(busRoutes.getBusesStoppingHere("Hospital"));
-        HashMap<String, HashSet<Integer>> stopsAndBusNumbers = busRoutes.getStopsAndBusNumbers();
-        System.out.println(stopsAndBusNumbers);
+//        HashMap<String, HashSet<Integer>> stopsAndBusNumbers = busRoutes.getStopsAndBusNumbers();
+//        System.out.println(stopsAndBusNumbers);
 
     }
 }
