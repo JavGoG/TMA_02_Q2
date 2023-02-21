@@ -110,45 +110,24 @@ public class BusRoutes {
 //(Q2)(h)
     public void accessInfoService()
     {
-        System.out.println("");
-        System.out.println("");
+
         System.out.println("Welcome to the Bus Information Service.");
         System.out.print("Type where you want to go to -> ");
         InputReader inputReader = new InputReader();
         BusRoutes busRoutes = new BusRoutes();
         HashSet<Integer> service = busRoutes.getBusesStoppingHere(inputReader.getInput());
         if(service.isEmpty()) {
-            System.out.println("Sorry, no buses go there");
+            System.out.print("Sorry, no buses go there");
         }else {
-            System.out.println('\n');
-            System.out.println("Here is a list of buses: ");
+            System.out.println('\n'+ "Here is a list of buses: ");
             for (Integer ser: service) {
                 System.out.println(ser);
             }
             System.out.println("");
-            System.out.print("Enter bus number to get a full route -> ");
+            System.out.println("Enter bus number to get a full route -> ");
+            System.out.println("");
             busRoutes.printRoute(new Integer(inputReader.getInput()));
-            routes.get(new Integer(inputReader.getInput())).forEach(System.out::println);
-
         }
-    }
-
-
-    public static void main(String[] args) {
-        BusRoutes busRoutes = new BusRoutes();
-        busRoutes.populateRoutes();
-//        busRoutes.printRoute(13);
-//        busRoutes.accessInfoService();
-//        System.out.println(busRoutes.getBusesStoppingHere("Hospital"));
-        HashMap<String, HashSet<Integer>> stopsAndBusNumbers = busRoutes.getStopsAndBusNumbers();
-//        System.out.println(stopsAndBusNumbers);
-//        BusRoutes br = new BusRoutes();
-//        HashMap<String, HashSet<Integer>> stopsMap = br.getStopsAndBusNumbers();
-//        TreeSet<Integer> buses = new TreeSet<>(stopsMap.get("Brown Street"));
-//        System.out.println(buses);
-//        buses = new TreeSet<>(stopsMap.get("Acacia Avenue"));
-//        System.out.println(buses);
-
     }
 }
 
