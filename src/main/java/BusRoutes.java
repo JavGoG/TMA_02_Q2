@@ -1,8 +1,7 @@
 //(Q2)(a)
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.*;
+import java.util.stream.Collectors;
 
 //(Q2)(b)
 public class BusRoutes {
@@ -50,6 +49,8 @@ public class BusRoutes {
     //    (Q2)(d)
     public void printRoute(int busNum) {
         System.out.println("Bus number " + busNum + " route: ");
+        ArrayList<String> route = routes.get(busNum);
+        route.stream().forEach(System.out::println);
     }
 
     //    (Q2)(e)
@@ -84,15 +85,28 @@ public class BusRoutes {
     }
 
     //(Q2)(g)
-    public HashMap<String, HashSet<Integer>> getStopsAndBusNumbers() {
-        InputReader inputReader = new InputReader();
-        String input = inputReader.getInput();
-        HashMap<String, HashSet<Integer>> stopsAndBusNumbers = new HashMap<>();
-        HashSet<Integer> buses = getBusesStoppingHere(input);
-        stopsAndBusNumbers.put(input, buses);
-        System.out.println(buses);
-        return stopsAndBusNumbers;
+    public HashMap<String, HashSet<Integer>> getStopsAndBusNumbers()
+    {
+        HashMap<String, HashSet<Integer>> stopsMap = new HashMap<>();
+        BusRoutes busRoutes = new BusRoutes();
+
+        final Collection<ArrayList<String>> values = routes.values();
+        ArrayList<String> stops = (ArrayList<String>) values.stream().flatMap(x->x.stream()).collect(Collectors.toList());
+        for (String stop : stops) {
+
+             if (routes.get(13).contains(stop)){
+                 stopsMap.put(stop,busRoutes.getBusesStoppingHere(stop));
+             }
+            if (routes.get(22).contains(stop)){
+                stopsMap.put(stop,busRoutes.getBusesStoppingHere(stop));
+            }
+            if (routes.get(32).contains(stop)){
+                stopsMap.put(stop,busRoutes.getBusesStoppingHere(stop));
+            }
+        }
+        return stopsMap;
     }
+
 //(Q2)(h)
     public void accessInfoService()
     {
@@ -123,10 +137,17 @@ public class BusRoutes {
     public static void main(String[] args) {
         BusRoutes busRoutes = new BusRoutes();
         busRoutes.populateRoutes();
-        busRoutes.accessInfoService();
+//        busRoutes.printRoute(13);
+//        busRoutes.accessInfoService();
 //        System.out.println(busRoutes.getBusesStoppingHere("Hospital"));
-//        HashMap<String, HashSet<Integer>> stopsAndBusNumbers = busRoutes.getStopsAndBusNumbers();
+        HashMap<String, HashSet<Integer>> stopsAndBusNumbers = busRoutes.getStopsAndBusNumbers();
 //        System.out.println(stopsAndBusNumbers);
+//        BusRoutes br = new BusRoutes();
+//        HashMap<String, HashSet<Integer>> stopsMap = br.getStopsAndBusNumbers();
+//        TreeSet<Integer> buses = new TreeSet<>(stopsMap.get("Brown Street"));
+//        System.out.println(buses);
+//        buses = new TreeSet<>(stopsMap.get("Acacia Avenue"));
+//        System.out.println(buses);
 
     }
 }
